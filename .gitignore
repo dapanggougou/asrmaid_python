@@ -1,0 +1,80 @@
+# === Python cache ===
+__pycache__/
+*.py[cod]
+*$py.class
+
+# === Virtual environments ===
+venv/
+env/
+.venv/
+.env/
+
+# === Jupyter Notebook checkpoints ===
+.ipynb_checkpoints
+
+# === VS Code settings ===
+.vscode/
+
+# === System files ===
+.DS_Store
+Thumbs.db
+
+# === Logs and debug ===
+*.log
+*.out
+*.err
+*.tmp
+
+# === Model files ===
+*.onnx
+*.pb
+*.pt
+*.h5
+*.ckpt
+*.tflite
+
+# === Data files ===
+*.csv
+*.tsv
+*.zip
+*.tar
+*.tar.gz
+*.npy
+*.npz
+
+# === Docker ===
+*.tar
+docker-compose.override.yml
+
+# === Ignore environment variable files ===
+.env
+.env.*
+
+# === Git LFS pointer files (if using LFS) ===
+*.lfs
+
+# === Compiled C extensions ===
+*.so
+
+# === Testing ===
+.coverage
+.cache/
+.pytest_cache/
+nosetests.xml
+coverage.xml
+htmlcov/
+
+# === Build artifacts ===
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# === Editor swap/temp files ===
+*~
+*.swp
+*.swo
+*.bak
+
+# === Node (if any frontend code) ===
+node_modules/

@@ -1,0 +1,27 @@
+FROM python:3.9-slim
+
+# 一行装好 wget 和 bzip2
+RUN apt-get update && apt-get install -y wget bzip2 && rm -rf /var/lib/apt/lists/*
+
+RUN useradd -m -u 1000 user
+USER user
+ENV PATH="/home/user/.local/bin:$PATH"
+
+WORKDIR /app
+
+COPY --chown=user requirements.txt .
+RUN pip install --no-cache-dir --upgrade -r requirements.txt
+
+COPY --chown=user . .
+
+# 下载并解压模型
+RUN mkdir -p /app/assets/sensevoicesmallonnx && \
+    wget -O /tmp/model.tar.bz2 https://github.com/k2-fsa/sherpa-onnx/releases/download/asr-models/sherpa-onnx-sense-voice-zh-en-ja-ko-yue-2024-07-17.tar.bz2 && \
+    tar -xvf /tmp/model.tar.bz2 -C /tmp/ && \
+    cp /tmp/sherpa-onnx-sense-voice-zh-en-ja-ko-yue-2024-07-17/model.onnx /app/assets/sensevoicesmallonnx/ && \
+    cp /tmp/sherpa-onnx-sense-voice-zh-en-ja-ko-yue-2024-07-17/tokens.txt /app/assets/sensevoicesmallonnx/ && \
+    rm -rf /tmp/model.tar.bz2 /tmp/sherpa-onnx-sense-voice-zh-en-ja-ko-yue-2024-07-17
+
+EXPOSE 7860
+
+CMD ["python", "asr_server.py", "--port", "7860", "--host", "0.0.0.0", "--ip-version", "4"]
