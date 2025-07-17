@@ -108,6 +108,8 @@ curl -X POST http://localhost:7860/asr \
 
 ## 🛠️ 开发与调试
 
+内网穿透(frp,ngrok)、异地组网(tailscale,zerotier)、docker(抱脸网)，都能免费部署自用。
+
 你可以设置日志级别以获得更详细的运行信息：
 
 ```bash
